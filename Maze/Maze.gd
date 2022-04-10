@@ -70,7 +70,7 @@ func _ready():
 	add_child(key)
 	print(key.global_transform.origin)
 	var exit = Exit.instance()
-	exit.translate(Vector3(width*tile_size-1.5,0.5,height*tiles-1.5))
+	exit.translate(Vector3(width*tile_size-1.5,0.5,height*tile_size-1.5))
 	add_child(exit)
 	print(exit.global_transform.origin)
 	
