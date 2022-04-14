@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UI/LoseScreen.gd" type="Script" id=1]
+[ext_resource path="res://Assets/TheDeadAreComing.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Lose Background.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/I Miss You.ogg" type="AudioStream" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 55
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 25
+outline_size = 1
+outline_color = Color( 0.576471, 0.756863, 0.537255, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+outline_size = 1
+outline_color = Color( 0.839216, 0.137255, 0.137255, 1 )
+font_data = ExtResource( 2 )
+
+[node name="LoseScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Node2D"]
+scale = Vector2( 0.8, 0.83 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0.25098 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ColorRect"]
+margin_right = 1024.0
+margin_bottom = 400.0
+custom_fonts/font = SubResource( 1 )
+text = "You have been eaten"
+align = 1
+valign = 1
+
+[node name="Play" type="Button" parent="."]
+margin_left = 360.0
+margin_top = 296.0
+margin_right = 660.0
+margin_bottom = 336.0
+custom_fonts/font = SubResource( 2 )
+text = "Try Again?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 360.0
+margin_top = 392.0
+margin_right = 660.0
+margin_bottom = 432.0
+custom_fonts/font = SubResource( 3 )
+text = "Quit?"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -12.0
+autoplay = true
+
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

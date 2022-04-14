@@ -66,13 +66,11 @@ func _ready():
 	randomize()
 	make_maze()
 	var key = Key.instance()
-	key.translate(Vector3(width*tile_size-1.5,.5,1.5))
+	key.translate(Vector3((width*tile_size)-1.5,1,0.5))
 	add_child(key)
-	print(key.global_transform.origin)
 	var exit = Exit.instance()
-	exit.translate(Vector3(width*tile_size-1.5,0.5,height*tiles-1.5))
+	exit.translate(Vector3((width*tile_size)-2,0.1,height*tile_size-2))
 	add_child(exit)
-	print(exit.global_transform.origin)
 	
 func check_neighbors(cell, unvisited):
 	# returns an array of cell's unvisited neighbors

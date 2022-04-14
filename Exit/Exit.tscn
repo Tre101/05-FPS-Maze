@@ -6,7 +6,6 @@
 radius = 0.5
 
 [node name="Exit" type="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 0, 39 )
 script = ExtResource( 1 )
 
 [node name="Light" type="OmniLight" parent="."]

@@ -6,8 +6,13 @@ var gravity = -30
 var max_speed = 8
 var mouse_sensitivity = 0.002
 var mouse_range = 1.2
+var rotation_speed = 0.05
 
 var velocity = Vector3()
+
+onready var rc = $Pivot/RayCast
+onready var flash = $Pivot/Blaster/Flash
+onready var Decal = preload("res://Player/Decal.tscn")
 
 func get_input():
 	var input_dir = Vector3()
@@ -23,6 +28,7 @@ func get_input():
 	return input_dir
 
 func _unhandled_input(event):
+	pass
 	if event is InputEventMouseMotion:
 		$Pivot.rotate_x(-event.relative.y * mouse_sensitivity)
 		rotate_y(-event.relative.x * mouse_sensitivity)
@@ -35,3 +41,14 @@ func _physics_process(delta):
 	velocity.x = desired_velocity.x
 	velocity.z = desired_velocity.z
 	velocity = move_and_slide(velocity, Vector3.UP, true)
+
+	if Input.is_action_pressed("shoot") and !flash.visible:
+		flash.shoot()
+		if rc.is_colliding():
+			var c = rc.get_collider()
+			var decal = Decal.instance()
+			rc.get_collider().add_child(decal)
+			decal.global_transform.origin = rc.get_collision_point()
+			decal.look_at(rc.get_collision_point() + rc.get_collision_normal(), Vector3.UP)
+			if c.is_in_group("Enemy"):
+				c.queue_free()
